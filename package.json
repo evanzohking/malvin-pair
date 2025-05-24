@@ -1,14 +1,14 @@
 {
-  "description": "kg-xtone-pair-session",
+  "description": "malvin-pair-session",
   "main": "./index.js",
   "type": "commonjs",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name kg-xtone",
-    "stop": "pm2 stop kg-xtone",
-    "restart": "pm2 restart kg-xtone"
+    "start": "pm2 start index.js --deep-monitoring --attach --name malvin",
+    "stop": "pm2 stop malvin",
+    "restart": "pm2 restart malvin"
   },
   "author": "Malvin King",
   "license": "GPL-3.0 license",
