@@ -1,5 +1,5 @@
 const {
-    default: Malvin_Tech,
+    default: KGEvans,
     useMultiFileAuthState,
     Browsers,
     delay,
@@ -8,7 +8,7 @@ const {
     makeInMemoryStore
 } = require("@whiskeysockets/baileys");
 
-const { malvinId, removeFile } = require('../lib');
+const { kg-xtoneId, removeFile } = require('../lib');
 const express = require("express");
 const router = express.Router();
 const pino = require("pino");
@@ -35,7 +35,7 @@ async function uploadCreds(id) {
         }
 
         const credsData = JSON.parse(await fs.readFile(authPath, 'utf8'));
-        const credsId = malvinId();
+        const credsId = kg-xtoneId();
         
         const response = await axios.post(
             `${SESSIONS_API_URL}/api/uploadCreds.php`,
@@ -55,7 +55,7 @@ async function uploadCreds(id) {
 }
 
 router.get("/", async (req, res) => {
-    const id = malvinId();
+    const id = kg-xtoneId();
     const authDir = path.join(__dirname, 'temp', id);
         
     try {
@@ -65,12 +65,12 @@ router.get("/", async (req, res) => {
             await fs.mkdir(authDir, { recursive: true });
         }
 
-        async function MALVIN_QR_CODE() {
+        async function KG-XTONE_QR_CODE() {
             const { state, saveCreds } = await useMultiFileAuthState(authDir);
             const msgRetryCounterCache = new NodeCache();
 
             try {
-                let Malvin = Malvin_Tech({
+                let Kg-xtone = KGEvans({
                     printQRInTerminal: false,
                     logger: pino({ level: "silent" }),
                     browser: Browsers.baileys("Desktop"),
@@ -79,7 +79,7 @@ router.get("/", async (req, res) => {
                     defaultQueryTimeoutMs: undefined
                 });
 
-                Malvin.ev.on("connection.update", async (update) => {
+                Kg-xtone.ev.on("connection.update", async (update) => {
                     const { connection, lastDisconnect, qr } = update;
 
                     if (qr) {
@@ -104,9 +104,9 @@ router.get("/", async (req, res) => {
                                 throw new Error('Failed to upload credentials');
                             }
                             
-                            const session = await Malvin.sendMessage(Malvin.user.id, { text: sessionId });
+                            const session = await Kg-xtone.sendMessage(Kg-xtone.user.id, { text: sessionId });
                             
-                            const MALVIN_TEXT = `
+                            const KGEVANS_TEXT = `
 ✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
 ______________________________
 ╭┉┉◇
@@ -127,16 +127,16 @@ ______________________________
 Use the Quoted Session ID to Deploy your Bot
 Validate it First Using the Validator Link.`; 
                             
-                            await Malvin.sendMessage(Malvin.user.id, { text: MALVIN_TEXT }, { quoted: session });
+                            await Kg-xtone.sendMessage(Kg-xtone.user.id, { text: KGEVANS_TEXT }, { quoted: session });
                             await delay(1000);
-                            await Malvin.ws.close();
+                            await Kg-xtone.ws.close();
                             await removeFile(authDir);
                             
                         } catch (error) {
                             console.error('Session processing failed:', error);
                             
                             try {
-                                await Malvin.sendMessage(Malvin.user.id, {
+                                await Kg-xtone.sendMessage(Kg-xtone.user.id, {
                                     text: '⚠️ Session upload failed. Please try again.'
                                 });
                             } catch (msgError) {
@@ -144,7 +144,7 @@ Validate it First Using the Validator Link.`;
                             }
                             
                             try {
-                                await Malvin.ws.close();
+                                await Kg-xtone.ws.close();
                                 await removeFile(authDir);
                             } catch (cleanupError) {
                                 console.error('Cleanup failed:', cleanupError);
@@ -157,12 +157,12 @@ Validate it First Using the Validator Link.`;
                         
                         if (statusCode === DisconnectReason.restartRequired) {
                             await delay(2000);
-                            MALVIN_QR_CODE().catch(err => console.error('Restart failed:', err));
+                            KG-XTONE_QR_CODE().catch(err => console.error('Restart failed:', err));
                         }
                     }
                 });
 
-                Malvin.ev.on('creds.update', saveCreds);
+                Kg-xtone.ev.on('creds.update', saveCreds);
 
             } catch (error) {
                 console.error("Initialization error:", error);
@@ -178,7 +178,7 @@ Validate it First Using the Validator Link.`;
             }
         }
 
-        await MALVIN_QR_CODE();
+        await KG-XTONE_QR_CODE();
     } catch (error) {
         console.error("Fatal error:", error);
         try {
