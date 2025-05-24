@@ -1,20 +1,20 @@
 {
-  "description": "malvin-pair-session",
+  "description": "kg-xtone-pair-session",
   "main": "./index.js",
   "type": "commonjs",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name malvin",
-    "stop": "pm2 stop malvin",
-    "restart": "pm2 restart malvin"
+    "start": "pm2 start index.js --deep-monitoring --attach --name kg-xtone",
+    "stop": "pm2 stop kg-xtone",
+    "restart": "pm2 restart kg-xtone"
   },
   "author": "Malvin King",
   "license": "GPL-3.0 license",
   "dependencies": {
     "awesome-phonenumber": "^2.64.0",
-    "@whiskeysockets/baileys": "^6.6.7",
+    "@whiskeysockets/baileys": "^6.7.17",
     "@hapi/boom": "*",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
