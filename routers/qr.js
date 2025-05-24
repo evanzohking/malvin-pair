@@ -110,18 +110,18 @@ router.get("/", async (req, res) => {
 ✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
 ______________________________
 ╭┉┉◇
-║『 𝐘𝐎𝐔'𝐕𝐄 𝐂𝐇𝐎𝐒𝐄𝐍 𝐌𝐀𝐋𝐕𝐈𝐍-𝐗𝐃 』
+║『 𝐘𝐎𝐔'𝐕𝐄 𝐂𝐇𝐎𝐒𝐄𝐍 KG-XTONE-MD 』
 ╰┅┅◇
 ╭───◇
 ╞ 『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
-╞〠 𝐓𝐮𝐭𝐨𝐫𝐢𝐚𝐥: _youtube.com/@malvintech2_
-╞⭖ 𝐎𝐰𝐧𝐞𝐫: _https://t.me/malvinking2_
-╞⟴ 𝐑𝐞𝐩𝐨: _https://github.com/XdKing2/MALVIN-XD_
+╞〠 𝐓𝐮𝐭𝐨𝐫𝐢𝐚𝐥: _https://whatsapp.com/channel/0029VbB6eyM7YSd78z6rDa3X_
+╞⭖ 𝐎𝐰𝐧𝐞𝐫: _https://wa.me/254791002497_
+╞⟴ 𝐑𝐞𝐩𝐨: _https://github.com/evanzohking/KG-XTONE-MD_
 ╞⭖ 𝐕𝐚𝐥𝐢𝐝𝐚𝐭𝐨𝐫: _https://pairing.giftedtech.web.id/validate_
-╞〠 𝐖𝐚𝐂𝐡𝐚𝐧𝐧𝐞𝐥: _https://whatsapp.com/channel/0029VbA6MSYJUM2TVOzCSb2A_
+╞〠 𝐖𝐚𝐂𝐡𝐚𝐧𝐧𝐞𝐥: _https://whatsapp.com/channel/0029VbB6eyM7YSd78z6rDa3X_
 ║ 💜💜💜
 ╰┈┈┈┈┈◇ 
- 𝐌𝐀𝐋𝐕𝐈𝐍-𝐗𝐃 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 4.𝟬.𝟬
+ KG-XTONE-MD
 ______________________________
 
 Use the Quoted Session ID to Deploy your Bot
