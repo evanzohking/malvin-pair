@@ -1,5 +1,5 @@
 const { 
-    Kg-XtoneId,
+    Kg-xtoneId,
     removeFile
 } = require('../lib'); 
 
@@ -32,7 +32,7 @@ async function uploadCreds(id) {
         }
 
         const credsData = JSON.parse(fs.readFileSync(authPath, 'utf8'));
-        const credsId = kg-xtoneId();
+        const credsId = Kg-xtoneId();
         
         const response = await axios.post(
             `${SESSIONS_API_URL}/api/uploadCreds.php`,
@@ -52,7 +52,7 @@ async function uploadCreds(id) {
 }
 
 router.get('/', async (req, res) => {
-    const id = kg-xtoneId(); 
+    const id = Kg-xtoneId(); 
     let num = req.query.number;
 
     if (!num) {
