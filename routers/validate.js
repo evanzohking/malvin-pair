@@ -12,10 +12,10 @@ router.post('/', async (req, res) => {
     }
 
     try {
-        if (!sessionId.startsWith('malvin~')) {
+        if (!sessionId.startsWith('kg~')) {
             return res.status(400).json({ 
                 valid: false,
-                error: 'Invalid Session ID format: Must start with "malvin~"'
+                error: 'Invalid Session ID format: Must start with "kg~"'
             });
         }
 
