@@ -1,5 +1,5 @@
 const { 
-    malvinId,
+    Kg-XtoneId,
     removeFile
 } = require('../lib'); 
 
@@ -15,7 +15,7 @@ const SESSIONS_API_URL = process.env.SESSIONS_API_URL;
 const SESSIONS_API_KEY = process.env.SESSIONS_API_KEY;
 
 const {
-    default: Malvin_Tech,
+    default: KGEvans,
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
@@ -32,7 +32,7 @@ async function uploadCreds(id) {
         }
 
         const credsData = JSON.parse(fs.readFileSync(authPath, 'utf8'));
-        const credsId = malvinId();
+        const credsId = kg-xtoneId();
         
         const response = await axios.post(
             `${SESSIONS_API_URL}/api/uploadCreds.php`,
@@ -52,14 +52,14 @@ async function uploadCreds(id) {
 }
 
 router.get('/', async (req, res) => {
-    const id = malvinId(); 
+    const id = kg-xtoneId(); 
     let num = req.query.number;
 
     if (!num) {
         return res.status(400).send({ error: "Phone number is required" });
     }
 
-    async function MALVIN_PAIR_CODE() {
+    async function KG-XTONE_PAIR_CODE() {
         const authDir = path.join(__dirname, 'temp', id);
         
         try {
@@ -69,7 +69,7 @@ router.get('/', async (req, res) => {
 
             const { state, saveCreds } = await useMultiFileAuthState(authDir);
 
-            let Malvin = Malvin_Tech({
+            let KG-XTONE = KGEvans({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -79,10 +79,10 @@ router.get('/', async (req, res) => {
                 browser: Browsers.macOS("Safari")
             });
 
-            if (!Malvin.authState.creds.registered) {
+            if (!KG-XTONE.authState.creds.registered) {
                 await delay(1500);
                 num = num.replace(/[^0-9]/g, '');
-                const code = await Malvin.requestPairingCode(num);
+                const code = await KG-XTONE.requestPairingCode(num);
                 console.log(`Your Code: ${code}`);
 
                 if (!res.headersSent) {
@@ -90,9 +90,9 @@ router.get('/', async (req, res) => {
                 }
             }
 
-            Malvin.ev.on('creds.update', saveCreds);
+            KG-XTONE.ev.on('creds.update', saveCreds);
             
-            Malvin.ev.on("connection.update", async (s) => {
+            KG-XTONE.ev.on("connection.update", async (s) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection === "open") {
@@ -104,9 +104,9 @@ router.get('/', async (req, res) => {
                             throw new Error('Failed to upload credentials');
                         }
 
-                        const session = await Malvin.sendMessage(Malvin.user.id, { text: sessionId });
+                        const session = await KG-XTONE.sendMessage(KG-XTONE.user.id, { text: sessionId });
 
-                        const MALVIN_TEXT = `
+                        const KG-XTONE_TEXT = `
 *✅sᴇssɪᴏɴ ɪᴅ ɢᴇɴᴇʀᴀᴛᴇᴅ✅*
 ______________________________
 ╭┉┉◇
@@ -127,17 +127,17 @@ ______________________________
 Use the Quoted Session ID to Deploy your Bot.
 Validate it First Using the Validator Link.`;
 
-                        await Malvin.sendMessage(Malvin.user.id, { text: MALVIN_TEXT }, { quoted: session });
+                        await KG-XTONE.sendMessage(KG-XTONE.user.id, { text: KG-XTONE_TEXT }, { quoted: session });
                     } catch (err) {
                         console.error('Error in connection update:', err);
                     } finally {
                         await delay(100);
-                        await Malvin.ws.close();
+                        await KG-XTONE.ws.close();
                         removeFile(authDir).catch(err => console.error('Error removing temp files:', err));
                     }
                 } else if (connection === "close" && lastDisconnect?.error?.output?.statusCode !== 401) {
                     await delay(10000);
-                    MALVIN_PAIR_CODE().catch(err => console.error('Error restarting pairing:', err));
+                    KG-XTONE_PAIR_CODE().catch(err => console.error('Error restarting pairing:', err));
                 }
             });
         } catch (err) {
@@ -150,7 +150,7 @@ Validate it First Using the Validator Link.`;
         }
     }
 
-    await MALVIN_PAIR_CODE();
+    await KG-XTONE_PAIR_CODE();
 });
 
 module.exports = router;
